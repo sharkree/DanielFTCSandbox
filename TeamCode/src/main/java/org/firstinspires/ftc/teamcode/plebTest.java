@@ -20,20 +20,22 @@ public class plebTest extends LinearOpMode {
         fRight = hardwareMap.dcMotor.get("fRight");
         bRight = hardwareMap.dcMotor.get("bRight");
 
-        fLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        bLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        fRight.setDirection(DcMotorSimple.Direction.FORWARD);
-        bRight.setDirection(DcMotorSimple.Direction.FORWARD);
+        fLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        bLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        fRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        bRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
         while(opModeIsActive()) {
-            double power = -gamepad1.left_stick_y;
+            double linearPower = gamepad1.left_stick_y;
+            double strafePower = gamepad1.left_stick_x;
+            double rotationalPower = gamepad1.right_stick_x;
 
-            fLeft.setPower(power);
-            bLeft.setPower(power);
-            fRight.setPower(power);
-            bRight.setPower(power);
+            fLeft.setPower(linearPower + rotationalPower + strafePower);
+            bLeft.setPower(linearPower + rotationalPower - strafePower);
+            fRight.setPower(linearPower - rotationalPower - strafePower);
+            bRight.setPower(linearPower - rotationalPower + strafePower);
 
             telemetry.addData("Time", SystemClock.elapsedRealtime());
             telemetry.addData("Gamepad left stick y", gamepad1.left_stick_y);
