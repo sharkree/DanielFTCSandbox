@@ -31,11 +31,12 @@ public class plebTest extends LinearOpMode {
             double linearPower = gamepad1.left_stick_y;
             double strafePower = gamepad1.left_stick_x;
             double rotationalPower = gamepad1.right_stick_x;
+            double scalar = 0.5;
 
-            fLeft.setPower(linearPower + rotationalPower + strafePower);
-            bLeft.setPower(linearPower + rotationalPower - strafePower);
-            fRight.setPower(linearPower - rotationalPower - strafePower);
-            bRight.setPower(linearPower - rotationalPower + strafePower);
+            fLeft.setPower(scalar * (linearPower + rotationalPower + strafePower));
+            bLeft.setPower(scalar * (linearPower + rotationalPower - strafePower));
+            fRight.setPower(scalar * (linearPower - rotationalPower - strafePower));
+            bRight.setPower(scalar * (linearPower - rotationalPower + strafePower));
 
             telemetry.addData("Time", SystemClock.elapsedRealtime());
             telemetry.addData("Gamepad left stick y", gamepad1.left_stick_y);
