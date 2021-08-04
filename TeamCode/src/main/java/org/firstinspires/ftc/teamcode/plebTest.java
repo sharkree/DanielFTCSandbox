@@ -13,6 +13,9 @@ public class plebTest extends LinearOpMode {
     DcMotor bLeft;
     DcMotor fRight;
     DcMotor bRight;
+
+    boolean cruiseControl = false;
+
     @Override
     public void runOpMode() throws InterruptedException {
         fLeft = hardwareMap.dcMotor.get("fLeft");
@@ -38,7 +41,8 @@ public class plebTest extends LinearOpMode {
             fRight.setPower(scalar * (linearPower - rotationalPower - strafePower));
             bRight.setPower(scalar * (linearPower - rotationalPower + strafePower));
 
-            telemetry.addData("Time", SystemClock.elapsedRealtime());
+            telemetry.addData("Time: ", SystemClock.elapsedRealtime());
+            telemetry.addData("Robot Speed: ", scalar);
             telemetry.addData("Gamepad left stick y", gamepad1.left_stick_y);
             telemetry.update();
         }
