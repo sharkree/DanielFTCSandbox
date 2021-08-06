@@ -14,8 +14,6 @@ public class plebTest extends LinearOpMode {
     DcMotor fRight;
     DcMotor bRight;
 
-    boolean cruiseControl = false;
-
     @Override
     public void runOpMode() throws InterruptedException {
         fLeft = hardwareMap.dcMotor.get("fLeft");
