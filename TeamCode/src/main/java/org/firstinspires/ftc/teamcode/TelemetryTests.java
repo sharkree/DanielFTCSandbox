@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp
-public class randomTelemetryProgram extends LinearOpMode {
+public class TelemetryTests extends LinearOpMode {
     DcMotor fLeft;
     DcMotor bLeft;
     DcMotor fRight;

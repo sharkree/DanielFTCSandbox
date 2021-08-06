@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp
-public class cruiseKontrol extends LinearOpMode {
+public class CruiseControl extends LinearOpMode {
     DcMotor fLeft;
     DcMotor bLeft;
     DcMotor fRight;
