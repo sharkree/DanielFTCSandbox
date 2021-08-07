@@ -13,7 +13,6 @@ public class cruiseKontrol extends LinearOpMode {
     DcMotor bLeft;
     DcMotor fRight;
     DcMotor bRight;
-    boolean cruiseControl = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -29,41 +28,19 @@ public class cruiseKontrol extends LinearOpMode {
 
         waitForStart();
 
-        while(opModeIsActive()) {
+        while (opModeIsActive()) {
             double linearPower = gamepad1.left_stick_y;
             double strafePower = gamepad1.left_stick_x;
             double rotationalPower = gamepad1.right_stick_x;
             double scalar = 0.5;
 
-            if (cruiseControl && gamepad1.right_trigger > 0) {
-                final double scalarCruise = gamepad1.right_trigger;
-                while (true) {
-                    if (gamepad1.x) {
-                        cruiseControl = !cruiseControl;
-                        break;
-                    }
-                    fLeft.setPower(scalarCruise * (linearPower + rotationalPower + strafePower));
-                    bLeft.setPower(scalarCruise * (linearPower + rotationalPower - strafePower));
-                    fRight.setPower(scalarCruise * (linearPower - rotationalPower - strafePower));
-                    bRight.setPower(scalarCruise * (linearPower - rotationalPower + strafePower));
-                }
+            if (gamepad1.dpad_up) {
+                updateScalarIncreasing(scalar);
+                sleep(50);
             }
-            else if (!cruiseControl) {
-                scalar = gamepad1.right_trigger;
-            }
-            else {
-                scalar = 0.5;
-            }
-
-            if(gamepad1.x){
-                if (cruiseControl){
-                    cruiseControl = !cruiseControl;
-                    sleep(250);
-                }
-                else {
-                    cruiseControl = !cruiseControl;
-                    sleep(250);
-                }
+            else if (gamepad1.dpad_down) {
+                updateScalarDecreasing(scalar);
+                sleep(50);
             }
 
             fLeft.setPower(scalar * (linearPower + rotationalPower + strafePower));
@@ -76,5 +53,23 @@ public class cruiseKontrol extends LinearOpMode {
             telemetry.addData("Gamepad left stick y", gamepad1.left_stick_y);
             telemetry.update();
         }
+    }
+    public void updateScalarIncreasing(double scalar) {
+        scalar = increaseSpeed(scalar);
+    }
+    public void updateScalarDecreasing(double scalar) {
+        scalar = decreaseSpeed(scalar);
+    }
+
+    public double increaseSpeed(double scalar) {
+        scalar = Math.min(1.0, scalar += 0.1);
+
+        return scalar;
+    }
+
+    public double decreaseSpeed(double scalar) {
+        scalar = Math.max(0.0, scalar -= 0.1);
+
+        return scalar;
     }
 }
