@@ -29,47 +29,14 @@ public class CruiseControl extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            double linearPower = gamepad1.left_stick_y;
-            double strafePower = gamepad1.left_stick_x;
-            double rotationalPower = gamepad1.right_stick_x;
-            double scalar = 0.5;
-
-            if (gamepad1.dpad_up) {
-                updateScalarIncreasing(scalar);
-                sleep(50);
-            }
-            else if (gamepad1.dpad_down) {
-                updateScalarDecreasing(scalar);
-                sleep(50);
-            }
-
-            fLeft.setPower(scalar * (linearPower + rotationalPower + strafePower));
-            bLeft.setPower(scalar * (linearPower + rotationalPower - strafePower));
-            fRight.setPower(scalar * (linearPower - rotationalPower - strafePower));
-            bRight.setPower(scalar * (linearPower - rotationalPower + strafePower));
+            fLeft.setPower(1);
+            bLeft.setPower(1);
+            fRight.setPower(1);
+            bRight.setPower(1);
 
             telemetry.addData("Time: ", SystemClock.elapsedRealtime());
-            telemetry.addData("Robot Speed: ", scalar);
             telemetry.addData("Gamepad left stick y", gamepad1.left_stick_y);
             telemetry.update();
         }
-    }
-    public void updateScalarIncreasing(double scalar) {
-        scalar = increaseSpeed(scalar);
-    }
-    public void updateScalarDecreasing(double scalar) {
-        scalar = decreaseSpeed(scalar);
-    }
-
-    public double increaseSpeed(double scalar) {
-        scalar = Math.min(1.0, scalar += 0.1);
-
-        return scalar;
-    }
-
-    public double decreaseSpeed(double scalar) {
-        scalar = Math.max(0.0, scalar -= 0.1);
-
-        return scalar;
     }
 }
