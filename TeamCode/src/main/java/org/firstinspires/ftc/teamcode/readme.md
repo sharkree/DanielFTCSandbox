@@ -1,3 +1,7 @@
+A place where daniel does weird ftc stuff that's too embarrassing and negative iq to be on a team repo
+
+Alternatively, this is a place where I post buggos.
+
 ## TeamCode Module
 
 Welcome!
