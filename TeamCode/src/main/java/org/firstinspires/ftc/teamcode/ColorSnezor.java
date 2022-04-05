@@ -1,30 +1,29 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
-import android.os.SystemClock;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
 @TeleOp
 public class ColorSnezor extends LinearOpMode {
-    ColorSensor couleursnezer;
+    ColorSensor colorSnezor;
 
     @Override
     public void runOpMode() {
-        couleursnezer = hardwareMap.get(ColorSensor.class, "colorSensor");
+        colorSnezor = hardwareMap.get(ColorSensor.class, "color");
+        long update = 0;
 
         waitForStart();
 
         while(opModeIsActive()) {
-            telemetry.addData("Time: ", SystemClock.elapsedRealtime());
-            telemetry.addData("Red: ", couleursnezer.red());
-            telemetry.addData("Green: ", couleursnezer.green());
-            telemetry.addData("Blue: ", couleursnezer.blue());
-            telemetry.addData("Alpha: ", couleursnezer.alpha());
+            long millis = System.currentTimeMillis();
+            update = millis - update;
+
+            telemetry.addData("Update Time: ", update);
+            telemetry.addData("Red: ", colorSnezor.red());
+            telemetry.addData("Green: ", colorSnezor.green());
+            telemetry.addData("Blue: ", colorSnezor.blue());
+            telemetry.addData("Alpha: ", colorSnezor.alpha());
             telemetry.update();
         }
     }
